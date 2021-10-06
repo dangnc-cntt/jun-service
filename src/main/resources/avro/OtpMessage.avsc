@@ -1,0 +1,15 @@
+{
+  "namespace": "com.iprediction.otp",
+  "name": "OtpMessage",
+  "type": "record",
+  "fields": [
+    {
+      "name": "phone",
+      "type": "string"
+    },
+    {
+      "name": "body",
+      "type": "string"
+    }
+  ]
+}
