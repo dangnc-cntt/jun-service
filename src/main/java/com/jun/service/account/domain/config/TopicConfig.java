@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Configuration
 public class TopicConfig {
-  public static final String SEND_MAIL_OTP = "jun_loyalty_email";
+  public static final String SEND_MAIL_OTP = "jun_email_otp";
 
   @Value("${spring.kafka.topic.replication-factor}")
   private short replicationFactor;

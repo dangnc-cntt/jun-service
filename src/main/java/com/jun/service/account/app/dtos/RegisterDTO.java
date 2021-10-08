@@ -11,7 +11,6 @@ public class RegisterDTO {
 
   @NotNull
   @Size(min = 6, max = 100)
-  @EmailConstraint
   private String username;
 
   @NotNull
@@ -26,7 +25,11 @@ public class RegisterDTO {
 
   private String phoneNumber;
 
-  @NotNull private String email;
+  @NotNull
+  @NotNull
+  @Size(min = 6, max = 100)
+  @EmailConstraint
+  private String email;
 
   private String avatarUrl;
 }

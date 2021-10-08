@@ -37,7 +37,7 @@ spring:
       properties:
         request:
           timeout:
-            ms: 120000
+            ms: 12000000
         schema.registry.url: ${SCHEMA_REGISTRY_URL}
         specific.avro.reader: true
       max-poll-records: 300

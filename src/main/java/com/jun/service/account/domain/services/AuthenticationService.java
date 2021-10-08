@@ -1,5 +1,6 @@
 package com.jun.service.account.domain.services;
 
+import com.iprediction.email.MailMessage;
 import com.jun.service.account.app.dtos.*;
 import com.jun.service.account.domain.data.ForgotPasswordInfo;
 import com.jun.service.account.domain.data.MailBodyObject;
@@ -26,6 +27,7 @@ import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -36,12 +38,12 @@ public class AuthenticationService extends BaseService {
   @Transactional(isolation = Isolation.SERIALIZABLE)
   public void register(RegisterDTO registerDTO) {
     if (registerDTO.getUsername() != null) {
-      Account account = accountStorage.findAccountByUserName(registerDTO.getUsername());
+      Account account = accountStorage.findAccountByUserNameNotCache(registerDTO.getUsername());
       checkAccount(account);
       comparePassword(registerDTO.getPassword(), registerDTO.getConfirmPassword());
       account = savedAccount(registerDTO);
 
-      if (Helper.regexEmail(registerDTO.getUsername())) {
+      if (Helper.regexEmail(registerDTO.getEmail())) {
         sendOTPEmail(account, AccountActionType.REG);
       }
     }
@@ -64,15 +66,15 @@ public class AuthenticationService extends BaseService {
     String redisKey = null;
     switch (accountActionType) {
       case REG:
-        redisKey = CacheKey.genRegEmailKey(account.getEmail());
+        redisKey = CacheKey.genRegEmailKey(account.getUsername());
         break;
 
       case FORGOT:
-        redisKey = CacheKey.genForgotPasswordKey(account.getEmail());
+        redisKey = CacheKey.genForgotPasswordKey(account.getUsername());
         break;
 
       case CHANGE_PASSWORD:
-        redisKey = CacheKey.genChangePasswordKey(account.getEmail());
+        redisKey = CacheKey.genChangePasswordKey(account.getUsername());
         break;
 
       default:
@@ -97,10 +99,8 @@ public class AuthenticationService extends BaseService {
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   public boolean verify(VerifyDTO dto) throws IOException {
-    String redisKey = null;
-    if (Helper.regexEmail(dto.getUsername())) {
-      redisKey = CacheKey.genRegEmailKey(dto.getUsername());
-    }
+    String redisKey = CacheKey.genRegEmailKey(dto.getUsername());
+
     if (!caching.exists(redisKey)) {
       Account account = accountStorage.findAccountByUserName(dto.getUsername());
       if (account == null) {
@@ -198,7 +198,7 @@ public class AuthenticationService extends BaseService {
       throw new AccountNotExistsException();
     }
     CheckOtpDTO checkOtpDTO = new CheckOtpDTO();
-    checkOtpDTO.setUsername(account.getEmail());
+    checkOtpDTO.setUsername(account.getUsername());
     checkOtpDTO.setCode(dto.getCode());
     checkOtpForgotPassword(checkOtpDTO);
     comparePassword(dto.getPassword(), dto.getConfirmedPassword());
@@ -269,10 +269,10 @@ public class AuthenticationService extends BaseService {
     return response;
   }
 
-  public Boolean sendMail() throws MessagingException {
+  public Boolean sendMail(List<MailMessage> mailMessages) throws MessagingException {
     final String fromMail = "dangnc.cntt@gmail.com";
     final String password = "0nomon@4namratruong";
-    final String toMail = "daidangtalavua@gmail.com";
+    //    final String toMail = "daidangtalavua@gmail.com";
 
     final String subject = "Jun Shop OTP";
 
@@ -292,20 +292,22 @@ public class AuthenticationService extends BaseService {
               }
             });
 
-    MimeMessage message = new MimeMessage(session);
+    for (MailMessage message : mailMessages) {
 
-    message.setFrom(new InternetAddress(fromMail));
-    message.setRecipients(
-        javax.mail.Message.RecipientType.TO, InternetAddress.parse(toMail, false));
-    message.setSubject(subject);
-    Map<String, String> body = new HashMap<>();
-    body.put("code", "123456");
-    body.put("fullName", "Ngô Công Đăng");
-    MailBodyObject bodyObject = new MailBodyObject(body);
-    message.setContent(htmlContent(bodyObject), "text/html");
+      MimeMessage mimeMessage = new MimeMessage(session);
 
-    Transport.send(message);
+      mimeMessage.setFrom(new InternetAddress(fromMail));
+      mimeMessage.setRecipients(
+          javax.mail.Message.RecipientType.TO, InternetAddress.parse(message.getEmailTo(), false));
+      mimeMessage.setSubject(subject);
+      Map<String, String> body = new HashMap<>();
+      body.put("code", message.getBody().get("code"));
+      body.put("fullName", message.getBody().get("fullName"));
+      MailBodyObject bodyObject = new MailBodyObject(body);
+      mimeMessage.setContent(htmlContent(bodyObject), "text/html");
 
+      Transport.send(mimeMessage);
+    }
     return true;
   }
 

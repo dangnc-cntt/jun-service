@@ -51,7 +51,8 @@ public class JwtTokenUtil implements Serializable {
     }
 
     TokenInfo tokenInfo = new TokenInfo();
-    tokenInfo.setAccountId(claims.get(Claims.SUBJECT, Integer.class));
+    //    tokenInfo.setAccountId((int) claims.get(Claims.SUBJECT, String.class));
+    tokenInfo.setAccountId(claims.get("accountId", Integer.class));
     tokenInfo.setAccountState(AccountState.valueOf(claims.get("accountState", String.class)));
 
     return tokenInfo;

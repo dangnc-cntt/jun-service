@@ -26,10 +26,7 @@ public class AccountStorage extends BaseStorage {
   }
 
   public Account findAccountByUserNameNotCache(String userName) {
-    Account account = accountRepository.findAccountByUsername(userName);
-    log.info("+=================== account: " + account);
-    return account;
-    // accountRepository.findAccountByUserName(userName);
+    return accountRepository.findAccountByUsername(userName);
   }
 
   public void processCache(Account account) {

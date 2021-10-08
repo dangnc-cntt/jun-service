@@ -22,7 +22,7 @@ public class SendMailOTPConsumer {
   public void batchConsumerWithAddPoint(List<MailMessage> messages, Acknowledgment acknowledgment)
       throws MessagingException {
     log.info("=========================" + messages);
-    authenticationService.sendMail();
+    authenticationService.sendMail(messages);
     acknowledgment.acknowledge();
   }
 }

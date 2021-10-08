@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Map;
@@ -79,8 +78,8 @@ public class AuthenticationController {
     return ResponseEntity.ok(authenticationService.refreshToken(dto));
   }
 
-  @GetMapping("mail")
-  public ResponseEntity<Boolean> testmail() throws MessagingException {
-    return ResponseEntity.ok(authenticationService.sendMail());
-  }
+  //  @GetMapping("mail")
+  //  public ResponseEntity<Boolean> testmail() throws MessagingException {
+  //    return ResponseEntity.ok(authenticationService.sendMail());
+  //  }
 }

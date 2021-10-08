@@ -30,7 +30,7 @@ public class Account extends BaseEntity {
   @Field(name = "full_name")
   private String fullName;
 
-  @Field(name = "phone_number")
+  @Field(name = "phone")
   private String phoneNumber;
 
   @Field(name = "email")
@@ -50,7 +50,4 @@ public class Account extends BaseEntity {
 
   @Field(name = "state")
   private AccountState state;
-
-  @Field(name = "created_by")
-  private Long createdBy;
 }

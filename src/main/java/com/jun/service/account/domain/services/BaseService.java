@@ -84,6 +84,8 @@ public class BaseService {
   protected Account savedAccount(RegisterDTO dto) {
     Account account = modelMapper.toAccount(dto);
     account.setId((int) generateSequence(Account.ACCOUNT_SEQUENCE));
+    account.setState(AccountState.NOT_VERIFIED);
+    account.setPassword(BCrypt.hashpw(dto.getPassword(), BCrypt.gensalt(12)));
     return accountStorage.save(account);
   }
 
@@ -117,7 +119,7 @@ public class BaseService {
     body.put("state", state.name());
     mailMessage.setBody(body);
 
-    log.info("==================================" + mailMessage);
+    log.error("==================================" + mailMessage);
     producer.sendMailOTPMessage(mailMessage);
   }
 
