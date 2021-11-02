@@ -14,7 +14,10 @@ import com.jun.service.account.domain.exceptions.AccountRetypePasswordNotMatchEx
 import com.jun.service.account.domain.exceptions.BadRequestException;
 import com.jun.service.account.domain.factory.RequestFactory;
 import com.jun.service.account.domain.producers.Producer;
+import com.jun.service.account.domain.repositories.*;
 import com.jun.service.account.domain.storages.AccountStorage;
+import com.jun.service.account.domain.storages.CategoryStorage;
+import com.jun.service.account.domain.storages.ProductStorage;
 import com.jun.service.account.domain.storages.VoucherStorage;
 import com.jun.service.account.domain.utils.*;
 import lombok.extern.log4j.Log4j2;
@@ -54,6 +57,13 @@ public class BaseService {
   @Autowired protected VoucherStorage voucherStorage;
 
   @Autowired private MongoOperations mongoOperations;
+  @Autowired protected ProductStorage productStorage;
+  @Autowired protected ProductRepository productRepository;
+  @Autowired protected ProductOptionRepository productOptionRepository;
+  @Autowired protected ColorRepository colorRepository;
+  @Autowired protected SizeRepository sizeRepository;
+  @Autowired protected CategoryStorage categoryStorage;
+  @Autowired protected CategoryRepository categoryRepository;
 
   public long generateSequence(String seqName) {
     Sequence counter =

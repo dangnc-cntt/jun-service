@@ -20,20 +20,19 @@ public class AccountController extends BaseController {
 
   @GetMapping(path = "profile")
   public ResponseEntity<AccountResponse> getProfile(
-      @RequestHeader(name = "x-loyalty-token") String token) {
+      @RequestHeader(name = "x-jun-token") String token) {
     return ResponseEntity.ok(accountService.getProfile(validateToken(token).getAccountId()));
   }
 
   @PutMapping()
   public ResponseEntity<AccountResponse> update(
-      @RequestHeader(name = "x-loyalty-token") String token,
-      @RequestBody @Valid AccountUpdateDTO dto) {
+      @RequestHeader(name = "x-jun-token") String token, @RequestBody @Valid AccountUpdateDTO dto) {
     return ResponseEntity.ok(accountService.update(validateToken(token).getAccountId(), dto));
   }
 
   @PutMapping(path = "change_password", params = "collection=update_password")
   public ResponseEntity<Boolean> changePassword(
-      @RequestHeader(name = "x-loyalty-token") String token,
+      @RequestHeader(name = "x-jun-token") String token,
       @RequestBody @Valid ChangePasswordDTO dto) {
     return ResponseEntity.ok(
         authenticationService.changePassword(dto, validateToken(token).getAccountId()));

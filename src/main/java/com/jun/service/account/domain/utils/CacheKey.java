@@ -39,4 +39,28 @@ public class CacheKey {
   public static String genAccountByUserNameKey(String userName) {
     return prefix + "::account_by_username:" + userName;
   }
+
+  public static String genListCategoryKey() {
+    return prefix + "::category:list";
+  }
+
+  public static String genCategoryIdKey(int id) {
+    return prefix + "::category:" + id;
+  }
+
+  public static String genListProductByCategoryKey(int categoryId) {
+    return prefix + "::products:category:" + categoryId;
+  }
+
+  public static String genProductKey(int productId) {
+    return prefix + "::product:" + productId;
+  }
+
+  public static String genListProductIsHotKey() {
+    return prefix + "::products:hot";
+  }
+
+  public static String genListOptionProductIdKey(int productId) {
+    return prefix + "::options:product:" + productId;
+  }
 }

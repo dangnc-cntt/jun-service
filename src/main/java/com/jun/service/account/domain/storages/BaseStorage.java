@@ -1,5 +1,9 @@
 package com.jun.service.account.domain.storages;
 
+import com.jun.service.ModelMapper;
+import com.jun.service.account.domain.repositories.CategoryRepository;
+import com.jun.service.account.domain.repositories.ProductOptionRepository;
+import com.jun.service.account.domain.repositories.ProductRepository;
 import com.jun.service.account.domain.repositories.account.AccountRepository;
 import com.jun.service.account.domain.repositories.voucher.VoucherRepository;
 import com.jun.service.account.domain.utils.Caching;
@@ -12,4 +16,9 @@ public class BaseStorage {
 
   @Autowired protected Caching caching;
   @Autowired protected MapperUtil mapperUtil;
+  @Autowired protected CategoryRepository categoryRepository;
+  @Autowired protected ProductRepository productRepository;
+  @Autowired protected ModelMapper modelMapper;
+  @Autowired protected ProductOptionRepository productOptionRepository;
+  @Autowired protected ProductOptionStorage productOptionStorage;
 }
