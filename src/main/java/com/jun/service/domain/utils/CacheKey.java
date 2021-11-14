@@ -24,10 +24,6 @@ public class CacheKey {
     return prefix + "_reg_email:user_name:" + username;
   }
 
-  public static String genActiveVoucherByIdKey(String voucherId) {
-    return prefix + "::active:voucher:" + voucherId;
-  }
-
   public static String genVoucherListKey() {
     return prefix + "::active:voucher:list";
   }
@@ -66,5 +62,9 @@ public class CacheKey {
 
   public static String genConfigKey(String key) {
     return prefix + "::config:" + key;
+  }
+
+  public static String genVoucherListByAccountIdKey(Integer accountId) {
+    return prefix + "::active:voucher:list:account:" + accountId;
   }
 }

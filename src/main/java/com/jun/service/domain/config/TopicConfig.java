@@ -11,6 +11,7 @@ import java.util.Map;
 @Configuration
 public class TopicConfig {
   public static final String SEND_MAIL_OTP = "jun_email_otp";
+  public static final String SEND_ORDER = "jun_order";
 
   @Value("${spring.kafka.topic.replication-factor}")
   private short replicationFactor;
@@ -27,6 +28,13 @@ public class TopicConfig {
   @Bean
   public NewTopic createSendMailTopic() {
     NewTopic topic = new NewTopic(SEND_MAIL_OTP, numPartitions, replicationFactor);
+    topic.configs(defaultConfigs);
+    return topic;
+  }
+
+  @Bean
+  public NewTopic createOrderTopic() {
+    NewTopic topic = new NewTopic(SEND_ORDER, numPartitions, replicationFactor);
     topic.configs(defaultConfigs);
     return topic;
   }

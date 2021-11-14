@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Log4j2
 public class LockManager {
-  public static final String LOCK_PREFIX = "wiinvent:loyalty:lock";
+  public static final String LOCK_PREFIX = "jun:lock";
 
   public static final int WAIT_TIME = 5; // the maximum time to aquire the lock
 

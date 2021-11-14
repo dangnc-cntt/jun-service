@@ -1,0 +1,49 @@
+{
+  "type": "record",
+  "namespace": "jun.message",
+  "name": "OrderMessage",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "orderedBy",
+      "type": "int"
+    },
+    {
+      "name": "productIds",
+      "type": {
+        "type": "array",
+        "items": "int"
+      }
+    },
+    {
+      "name": "price",
+      "type": "float"
+    },
+    {
+      "name": "discount",
+      "type": "float"
+    },
+    {
+      "name": "note",
+      "type": "string"
+    },
+    {
+      "name": "voucherIds",
+      "type": {
+        "type": "array",
+        "items": "int"
+      }
+    },
+    {
+      "name": "state",
+      "type": "string"
+    },
+    {
+      "name": "paymentMethod",
+      "type": "string"
+    }
+  ]
+}

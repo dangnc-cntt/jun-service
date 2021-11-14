@@ -43,7 +43,7 @@ spring:
       max-poll-records: 300
       fetch-max-wait: 10000 # 10s
       fetch-min-size: 50000000 #50mb
-      group-id: "loyalty-service"
+      group-id: "jun-service"
 #  aop:
 #    proxy-target-class: true
 #  main:

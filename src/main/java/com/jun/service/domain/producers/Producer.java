@@ -2,6 +2,7 @@ package com.jun.service.domain.producers;
 
 import com.iprediction.email.MailMessage;
 import com.jun.service.domain.config.TopicConfig;
+import jun.message.OrderMessage;
 import lombok.extern.log4j.Log4j2;
 import org.apache.avro.specific.SpecificRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,16 @@ public class Producer {
     try {
       log.info("===========================" + mailMessage);
       kafkaTemplate.send((TopicConfig.SEND_MAIL_OTP), mailMessage);
+    } catch (Exception e) {
+      log.error(String.valueOf(e));
+      throw e;
+    }
+  }
+
+  public void sendOrderMessage(OrderMessage orderMessage) {
+    try {
+      log.info("===========================" + orderMessage);
+      kafkaTemplate.send((TopicConfig.SEND_MAIL_OTP), orderMessage);
     } catch (Exception e) {
       log.error(String.valueOf(e));
       throw e;

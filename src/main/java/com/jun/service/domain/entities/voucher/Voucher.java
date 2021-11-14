@@ -16,38 +16,32 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Voucher extends BaseEntity {
 
-  @Id private String id;
+  @Id private Integer id;
 
   @Field(name = "name")
   private String name;
 
-  @Field(name = "thumb")
-  private String thumbUrl;
+  @Field(name = "image_url")
+  private String image_url;
 
-  @Field(name = "expire")
-  private LocalDateTime expire;
+  @Field(name = "expiry_date")
+  private LocalDateTime expiryDate;
+
+  @Field(name = "code")
+  private String code;
+
+  @Field(name = "discount")
+  private Double discount;
 
   @Field(name = "type")
   private VoucherType type;
 
-  @Field(name = "bean_price")
-  private Long beanPrice;
-
-  @Field(name = "diamond_price")
-  private Long diamondPrice;
-
-  @Field(name = "amount")
-  private Integer amount;
-
-  @Field(name = "remain")
-  private Integer remain;
-
   @Field(name = "state")
   private VoucherState state;
 
-  @Field(name = "hot")
-  private Boolean isHot;
+  @Field(name = "description")
+  private String description;
 
-  @Field(name = "detail")
-  private String detail;
+  @Field(name = "created_by")
+  private Integer createdBy;
 }
