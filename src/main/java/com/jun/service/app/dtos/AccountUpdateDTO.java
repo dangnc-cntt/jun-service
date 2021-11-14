@@ -1,6 +1,5 @@
 package com.jun.service.app.dtos;
 
-import com.jun.service.domain.custom_annotations.EmailConstraint;
 import com.jun.service.domain.entities.types.Gender;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,15 +10,11 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class AccountUpdateDTO {
-  @NotNull private String username;
-
-  @NotNull private String password;
-
   @NotNull private String fullName;
 
-  @NotNull private String phoneNumber;
+  private String phoneNumber;
 
-  @NotNull @EmailConstraint private String email;
+  private String email;
 
   private LocalDateTime address;
 
