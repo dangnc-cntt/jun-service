@@ -1,6 +1,6 @@
 package com.jun.service;
 
-import com.jun.service.account.domain.repositories.base.impl.MongoResourceRepositoryImpl;
+import com.jun.service.domain.repositories.base.impl.MongoResourceRepositoryImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
