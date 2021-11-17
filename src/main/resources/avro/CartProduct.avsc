@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "jun.message",
+  "name": "CartProduct",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "optionId",
+      "type": "int"
+    }
+  ]
+}

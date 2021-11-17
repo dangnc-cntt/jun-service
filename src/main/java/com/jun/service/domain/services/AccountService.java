@@ -41,7 +41,7 @@ public class AccountService extends BaseService {
 
     // TODO: check format of email anh phoneNumber
 
-    account = modelMapper.toAccount(dto);
+    account.from(dto);
 
     accountStorage.save(account);
     return modelMapper.toAccountResponse(account);

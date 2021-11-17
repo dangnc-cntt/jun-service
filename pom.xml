@@ -281,6 +281,13 @@
                             <goal>schema</goal>
                         </goals>
                         <configuration>
+
+                            <imports>
+                                <import>${project.basedir}/src/main/resources/avro/MailMessage.avsc</import>
+                                <import>${project.basedir}/src/main/resources/avro/OtpMessage.avsc</import>
+                                <import>${project.basedir}/src/main/resources/avro/CartProduct.avsc</import>
+                                <import>${project.basedir}/src/main/resources/avro/OrderMessage.avsc</import>
+                            </imports>
                             <sourceDirectory>${project.basedir}/src/main/resources/avro/</sourceDirectory>
                             <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
                             <stringType>String</stringType>

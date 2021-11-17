@@ -68,6 +68,10 @@ public class BaseService {
   @Autowired protected ConfigStorage configStorage;
   @Autowired protected VoucherAccountRepository voucherAccountRepository;
   @Autowired protected OrderRepository orderRepository;
+  @Autowired protected CartRepository cartRepository;
+  @Autowired protected CartStorage cartStorage;
+  @Autowired protected ProductService productService;
+  @Autowired protected ProductOptionStorage productOptionStorage;
 
   public long generateSequence(String seqName) {
     Sequence counter =
@@ -137,7 +141,7 @@ public class BaseService {
     producer.sendMailOTPMessage(mailMessage);
   }
 
-  public String request(VnpDTO dto) throws UnsupportedEncodingException {
+  public String requestToVNP(VnpDTO dto) throws UnsupportedEncodingException {
     String vnp_IpAddr = Vnp_Ultil.vnp_ip;
     Map<String, String> vnp_Params = new HashMap<>();
     vnp_Params.put("vnp_Version", Vnp_Ultil.vnp_version);

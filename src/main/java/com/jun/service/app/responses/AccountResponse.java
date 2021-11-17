@@ -1,27 +1,26 @@
 package com.jun.service.app.responses;
 
-import com.jun.service.domain.entities.types.AccountState;
 import com.jun.service.domain.entities.types.Gender;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 public class AccountResponse {
-  private String id;
-  private String fullName;
-  private String avatarUrl;
-  private String phoneNumber;
-  private Long referralId;
-  private AccountState state;
+
+  private Integer id;
 
   private String username;
 
+  private String fullName;
+
+  private String phoneNumber;
+
   private String email;
 
-  private LocalDateTime address;
+  private String address;
 
   private Gender gender;
+
+  private String avatarUrl;
 }

@@ -3,6 +3,7 @@ package com.jun.service.domain.entities;
 import com.jun.service.domain.entities.types.OrderState;
 import com.jun.service.domain.entities.types.PaymentMethod;
 import com.jun.service.domain.entities.types.VoucherType;
+import jun.message.OrderMessage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -38,7 +39,7 @@ public class Order extends BaseEntity {
   private String note;
 
   @Field(name = "voucher")
-  private List<VoucherView> vouchers;
+  private VoucherView voucher;
 
   @Field(name = "state")
   private OrderState state = OrderState.NEW;
@@ -55,6 +56,7 @@ public class Order extends BaseEntity {
     private Float costPrice;
     private Float price;
     private Float discount;
+    private ProductOption option;
   }
 
   @Data
@@ -69,5 +71,22 @@ public class Order extends BaseEntity {
     private Double discount;
 
     private VoucherType type;
+  }
+
+  public void assign(
+      List<ProductView> productViewList,
+      Long orderId,
+      VoucherView voucherViews,
+      OrderMessage message) {
+
+    id = orderId;
+    orderedBy = message.getOrderedBy();
+    products = productViewList;
+    price = message.getPrice();
+    discount = message.getDiscount();
+    note = message.getNote();
+    voucher = voucherViews;
+    state = OrderState.valueOf(message.getState());
+    paymentMethod = PaymentMethod.valueOf(message.getPaymentMethod());
   }
 }

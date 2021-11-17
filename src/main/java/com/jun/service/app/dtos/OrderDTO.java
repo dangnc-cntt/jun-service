@@ -2,25 +2,23 @@ package com.jun.service.app.dtos;
 
 import com.jun.service.domain.entities.types.OrderState;
 import com.jun.service.domain.entities.types.PaymentMethod;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 public class OrderDTO {
-  private Long id;
-
-  private Integer orderedBy;
-
-  private List<Integer> productIds;
-
-  private Float price;
-
-  private Float discount;
-
-  private String note;
-
-  private List<Integer> voucherIds;
-
-  private OrderState state;
-
-  private PaymentMethod paymentMethod;
+  @NotNull private Long id;
+  @NotNull private List<CartProductDTO> products;
+  @NotNull private Float total;
+  @NotNull private Float discount;
+  @NotNull private String note;
+  @NotNull private Integer voucherId;
+  @NotNull private OrderState state;
+  @NotNull private PaymentMethod paymentMethod;
+  private String bankCode;
+  @NotNull private Integer amount;
 }

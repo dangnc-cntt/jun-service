@@ -12,11 +12,12 @@
       "type": "int"
     },
     {
-      "name": "productIds",
+      "name": "productList",
       "type": {
         "type": "array",
-        "items": "int"
-      }
+        "items": "CartProduct"
+      },
+      "default": []
     },
     {
       "name": "price",
@@ -31,11 +32,8 @@
       "type": "string"
     },
     {
-      "name": "voucherIds",
-      "type": {
-        "type": "array",
-        "items": "int"
-      }
+      "name": "voucherId",
+      "type": "int"
     },
     {
       "name": "state",
@@ -44,6 +42,10 @@
     {
       "name": "paymentMethod",
       "type": "string"
+    },
+    {
+      "name": "amount",
+      "type": "int"
     }
   ]
 }

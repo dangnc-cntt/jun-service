@@ -1,5 +1,6 @@
 package com.jun.service.domain.entities.account;
 
+import com.jun.service.app.dtos.AccountUpdateDTO;
 import com.jun.service.domain.entities.BaseEntity;
 import com.jun.service.domain.entities.types.AccountState;
 import com.jun.service.domain.entities.types.Gender;
@@ -40,7 +41,7 @@ public class Account extends BaseEntity {
   private LocalDateTime confirmedAt;
 
   @Field(name = "address")
-  private LocalDateTime address;
+  private String address;
 
   @Field(name = "gender")
   private Gender gender;
@@ -50,4 +51,20 @@ public class Account extends BaseEntity {
 
   @Field(name = "state")
   private AccountState state;
+
+  public void from(AccountUpdateDTO dto) {
+    fullName = dto.getFullName();
+
+    phoneNumber =
+        dto.getPhoneNumber() == null
+            ? phoneNumber == null ? null : phoneNumber
+            : dto.getPhoneNumber();
+
+    address = dto.getPhoneNumber() == null ? address == null ? null : address : dto.getAddress();
+
+    gender = dto.getPhoneNumber() == null ? gender == null ? null : gender : dto.getGender();
+
+    avatarUrl =
+        dto.getPhoneNumber() == null ? avatarUrl == null ? null : avatarUrl : dto.getAvatarUrl();
+  }
 }

@@ -12,4 +12,6 @@ public interface VoucherAccountRepository extends MongoRepository<VoucherAccount
 
   VoucherAccount findByAccountIdAndVoucherCodeAndIsUsed(
       Integer accountId, String voucherCode, Boolean isUsed);
+
+  VoucherAccount findVoucherAccountByAccountIdAndVoucherId(Integer accountId, Integer voucherId);
 }

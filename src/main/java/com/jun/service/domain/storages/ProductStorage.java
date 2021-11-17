@@ -35,7 +35,7 @@ public class ProductStorage extends BaseStorage {
     return new PageResponse<>(responseList, Metadata.createFrom(productPage));
   }
 
-  public ProductResponse findById(int productId) {
+  public Product findById(int productId) {
     Product product = caching.get(CacheKey.genProductKey(productId), Product.class);
     if (product == null) {
       product = productRepository.findProductByIdAndState(productId, ProductState.ACTIVE);
@@ -43,10 +43,8 @@ public class ProductStorage extends BaseStorage {
         caching.put(CacheKey.genProductKey(productId), product);
       }
     }
-    ProductResponse productResponse = modelMapper.toProductResponse(product);
-    List<ProductOption> optionList = productOptionRepository.findByProductId(product.getId());
-    productResponse.setOptionList(optionList == null ? new ArrayList<>() : optionList);
-    return productResponse;
+
+    return product;
   }
 
   public PageResponse<ProductResponse> findByCategoryId(int categoryId, Pageable pageable) {

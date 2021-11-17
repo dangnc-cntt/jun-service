@@ -4,6 +4,7 @@ import com.jun.service.app.dtos.AccountUpdateDTO;
 import com.jun.service.app.dtos.OrderDTO;
 import com.jun.service.app.dtos.RegisterDTO;
 import com.jun.service.app.responses.AccountResponse;
+import com.jun.service.app.responses.CartProductResponse;
 import com.jun.service.app.responses.ProductResponse;
 import com.jun.service.domain.entities.Product;
 import com.jun.service.domain.entities.account.Account;
@@ -20,6 +21,8 @@ public interface ModelMapper {
   Account toAccount(AccountUpdateDTO registerDTO);
 
   ProductResponse toProductResponse(Product product);
+
+  CartProductResponse toCartProductResponse(Product product);
 
   OrderMessage toOrderMessage(OrderDTO dto);
 }

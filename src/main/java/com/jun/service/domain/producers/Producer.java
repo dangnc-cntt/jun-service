@@ -37,7 +37,7 @@ public class Producer {
   public void sendOrderMessage(OrderMessage orderMessage) {
     try {
       log.info("===========================" + orderMessage);
-      kafkaTemplate.send((TopicConfig.SEND_MAIL_OTP), orderMessage);
+      kafkaTemplate.send((TopicConfig.SEND_ORDER), orderMessage);
     } catch (Exception e) {
       log.error(String.valueOf(e));
       throw e;

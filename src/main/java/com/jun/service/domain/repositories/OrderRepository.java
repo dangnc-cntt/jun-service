@@ -11,4 +11,6 @@ public interface OrderRepository extends MongoRepository<Order, Long> {
   Page<Order> findByOrderedByOrderByCreatedAt(Integer accountId, Pageable pageable);
 
   Order findByIdAndOrderedBy(Long id, Integer accountId);
+
+  Order findOrderById(Long id);
 }

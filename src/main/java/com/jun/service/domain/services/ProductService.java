@@ -1,5 +1,6 @@
 package com.jun.service.domain.services;
 
+import com.jun.service.app.responses.CartProductResponse;
 import com.jun.service.app.responses.Metadata;
 import com.jun.service.app.responses.PageResponse;
 import com.jun.service.app.responses.ProductResponse;
@@ -52,7 +53,7 @@ public class ProductService extends BaseService {
     if (productPage != null && productPage.getContent().size() > 0) {
       for (Product product : productPage.getContent()) {
         ProductResponse productResponse = modelMapper.toProductResponse(product);
-        List<ProductOption> optionList = productOptionRepository.findByProductId(product.getId());
+        List<ProductOption> optionList = productOptionStorage.findByProduct(product.getId());
         productResponse.setOptionList(optionList == null ? new ArrayList<>() : optionList);
         productResponses.add(productResponse);
       }
@@ -105,11 +106,33 @@ public class ProductService extends BaseService {
   //  }
 
   public ProductResponse findById(int productId) {
-    ProductResponse product = productStorage.findById(productId);
+    Product product = productStorage.findById(productId);
+
     if (product == null) {
       throw new ResourceNotFoundException("Product with id: " + productId + " is exist!");
     }
-    return product;
+    ProductResponse productResponse = modelMapper.toProductResponse(product);
+    List<ProductOption> optionList = productOptionStorage.findByProduct(product.getId());
+    productResponse.setOptionList(optionList == null ? new ArrayList<>() : optionList);
+    return productResponse;
+  }
+
+  public ProductResponse findByIdNoException(int productId) {
+    Product product = productStorage.findById(productId);
+
+    if (product == null) {
+      return null;
+    }
+    return modelMapper.toProductResponse(product);
+  }
+
+  public CartProductResponse findByIdNoExceptionForCart(int productId) {
+    Product product = productStorage.findById(productId);
+
+    if (product == null) {
+      return null;
+    }
+    return modelMapper.toCartProductResponse(product);
   }
 
   public PageResponse<ProductResponse> findAll(Pageable pageable) {
