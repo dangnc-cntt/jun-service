@@ -236,6 +236,37 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-streams-avro-serde</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <artifactId>kafka-schema-registry-client</artifactId>
+            <groupId>io.confluent</groupId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>
             <version>1.2.5.RELEASE</version>
@@ -244,6 +275,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
             <version>5.2.8.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.10.5</version>
         </dependency>
 
         <dependency>
@@ -287,6 +324,8 @@
                                 <import>${project.basedir}/src/main/resources/avro/OtpMessage.avsc</import>
                                 <import>${project.basedir}/src/main/resources/avro/CartProduct.avsc</import>
                                 <import>${project.basedir}/src/main/resources/avro/OrderMessage.avsc</import>
+                                <import>${project.basedir}/src/main/resources/avro/ReviewMessage.avsc</import>
+                                <import>${project.basedir}/src/main/resources/avro/ProductStatistic.avsc</import>
                             </imports>
                             <sourceDirectory>${project.basedir}/src/main/resources/avro/</sourceDirectory>
                             <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>

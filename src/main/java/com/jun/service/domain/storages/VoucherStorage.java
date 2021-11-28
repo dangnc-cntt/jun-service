@@ -2,7 +2,6 @@ package com.jun.service.domain.storages;
 
 import com.jun.service.domain.entities.types.VoucherState;
 import com.jun.service.domain.entities.voucher.Voucher;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +17,7 @@ public class VoucherStorage extends BaseStorage {
         voucherId, VoucherState.ACTIVE, LocalDateTime.now());
   }
 
-  public Page<Voucher> findByIds(List<Integer> ids, Pageable pageable) {
-    return voucherRepository.findAllByIdAndStateAndExpiryDateBeforeOrderByCreatedAt(
-        ids, VoucherState.ACTIVE, LocalDateTime.now(), pageable);
+  public List<Voucher> findByIds(List<Integer> ids, Pageable pageable) {
+    return voucherRepository.findAllById(ids);
   }
 }

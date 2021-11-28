@@ -50,7 +50,10 @@ public class ProductService extends BaseService {
 
     Page<Product> productPage = productRepository.findAll(query, pageable);
     List<ProductResponse> productResponses = new ArrayList<>();
-    if (productPage != null && productPage.getContent().size() > 0) {
+    if (productPage == null) {
+      return null;
+    }
+    if (productPage.getContent().size() > 0) {
       for (Product product : productPage.getContent()) {
         ProductResponse productResponse = modelMapper.toProductResponse(product);
         List<ProductOption> optionList = productOptionStorage.findByProduct(product.getId());
@@ -58,6 +61,7 @@ public class ProductService extends BaseService {
         productResponses.add(productResponse);
       }
     }
+
     return new PageResponse<>(productResponses, Metadata.createFrom(productPage));
   }
 

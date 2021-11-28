@@ -41,9 +41,23 @@ spring:
         schema.registry.url: ${SCHEMA_REGISTRY_URL}
         specific.avro.reader: true
       max-poll-records: 300
-      fetch-max-wait: 10000 # 10s
+      fetch-max-wait: 3000 # 10s
       fetch-min-size: 50000000 #50mb
       group-id: "jun-service"
+    streams:
+      application-id: wiinvent-eventlog-streams
+      cache-max-size-buffering: 20MB
+      state-dir: ${STATE_DIR}
+      properties:
+        # num.standby.replicas: 1
+        num.stream.threads: 3
+        auto.offset.reset: earliest
+        schema.registry.url: ${SCHEMA_REGISTRY_URL}
+        processing.guarantee: exactly_once
+        default.timestamp.extractor: org.apache.kafka.streams.processor.WallclockTimestampExtractor
+        buffered.records.per.partition: 100
+        default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+        default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 #  aop:
 #    proxy-target-class: true
 #  main:

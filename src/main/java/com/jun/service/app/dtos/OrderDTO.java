@@ -11,14 +11,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class OrderDTO {
-  @NotNull private Long id;
   @NotNull private List<CartProductDTO> products;
   @NotNull private Float total;
-  @NotNull private Float discount;
   @NotNull private String note;
   @NotNull private Integer voucherId;
   @NotNull private OrderState state;
   @NotNull private PaymentMethod paymentMethod;
   private String bankCode;
-  @NotNull private Integer amount;
 }

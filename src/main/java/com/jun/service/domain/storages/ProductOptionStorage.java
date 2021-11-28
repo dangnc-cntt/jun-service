@@ -21,4 +21,16 @@ public class ProductOptionStorage extends BaseStorage {
     }
     return optionList;
   }
+
+  public void saveAll(List<ProductOption> productOptions) {
+    if (productOptions != null && productOptions.size() > 0) {
+      for (ProductOption option : productOptions) {
+        caching.del(CacheKey.genListOptionProductIdKey(option.getProductId()));
+      }
+
+      productOptionRepository.saveAll(productOptions);
+    }
+  }
+
+  //  public static void main(String[] args) {}
 }

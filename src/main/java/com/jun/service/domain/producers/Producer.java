@@ -3,6 +3,7 @@ package com.jun.service.domain.producers;
 import com.iprediction.email.MailMessage;
 import com.jun.service.domain.config.TopicConfig;
 import jun.message.OrderMessage;
+import jun.message.ReviewMessage;
 import lombok.extern.log4j.Log4j2;
 import org.apache.avro.specific.SpecificRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,16 @@ public class Producer {
     try {
       log.info("===========================" + orderMessage);
       kafkaTemplate.send((TopicConfig.SEND_ORDER), orderMessage);
+    } catch (Exception e) {
+      log.error(String.valueOf(e));
+      throw e;
+    }
+  }
+
+  public void sendReviewMessage(ReviewMessage message) {
+    try {
+      log.info("===========================" + message);
+      kafkaTemplate.send((TopicConfig.SEND_REVIEW), message);
     } catch (Exception e) {
       log.error(String.valueOf(e));
       throw e;

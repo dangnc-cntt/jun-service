@@ -1,0 +1,30 @@
+{
+  "namespace": "jun.message",
+  "name": "ReviewMessage",
+  "type": "record",
+  "fields": [
+    {
+      "name": "productId",
+      "type": "int",
+      "doc": "Review ID as per Udemy's db"
+    },
+    {
+      "name": "content",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "created_by",
+      "type": "int",
+      "default": 0
+    },
+    {
+      "name": "star",
+      "type": "int",
+      "doc": "review value"
+    }
+  ]
+}

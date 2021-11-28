@@ -71,6 +71,7 @@ public class CartService extends BaseService {
     if (listCartProdDTO.size() > 0) {
       for (CartProductDTO cartProductDTO : listCartProdDTO) {
         if (cartProductDTO.getId().equals(dto.getId())) {
+          count++;
           if (cartProductDTO.getOptionId().equals(dto.getOptionId())) {
             cartProductDTO.setAmount(
                 cartProductDTO.getAmount() == null
@@ -80,9 +81,10 @@ public class CartService extends BaseService {
             cartProductDTO.setOptionId(dto.getOptionId());
             cartProductDTO.setAmount(dto.getAmount());
           }
-        } else {
-          listCartProdDTO.add(dto);
         }
+      }
+      if (count == 0) {
+        listCartProdDTO.add(dto);
       }
     } else {
       listCartProdDTO.add(dto);
@@ -116,13 +118,13 @@ public class CartService extends BaseService {
   }
 
   public List<CartProductResponse> update(List<CartProductDTO> dtoList, Integer accountId) {
+    Cart cart = cartRepository.findByAccountId(accountId);
+    if (cart == null) {
+      cart = new Cart();
+      cart.setAccountId(accountId);
+    }
     if (dtoList != null && dtoList.size() > 0) {
 
-      Cart cart = cartRepository.findByAccountId(accountId);
-      if (cart == null) {
-        cart = new Cart();
-        cart.setAccountId(accountId);
-      }
       List<CartProductDTO> listProduct = new ArrayList<>();
 
       for (CartProductDTO dto : dtoList) {
@@ -134,6 +136,8 @@ public class CartService extends BaseService {
       cart = cartStorage.save(cart);
       return findByDTO(cart.getProducts());
     }
-    return new ArrayList<>();
+    cart.setProducts(new ArrayList<>());
+    cart = cartStorage.save(cart);
+    return findByDTO(cart.getProducts());
   }
 }

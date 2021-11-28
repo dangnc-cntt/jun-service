@@ -14,6 +14,7 @@ public class BaseController {
   @Autowired protected VoucherService voucherService;
   @Autowired protected CartService cartService;
   @Autowired protected OrderService orderService;
+  @Autowired protected ReviewService reviewService;
 
   public TokenInfo validateToken(String token) {
     return tokenService.validateToken(token);

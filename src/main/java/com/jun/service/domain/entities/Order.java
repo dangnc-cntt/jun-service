@@ -42,7 +42,7 @@ public class Order extends BaseEntity {
   private VoucherView voucher;
 
   @Field(name = "state")
-  private OrderState state = OrderState.NEW;
+  private OrderState state;
 
   @Field(name = "payment_method")
   private PaymentMethod paymentMethod;
@@ -52,6 +52,7 @@ public class Order extends BaseEntity {
   public static class ProductView {
     private Integer id;
     private String name;
+    private List<String> imageUrls;
     private String code;
     private Float costPrice;
     private Float price;

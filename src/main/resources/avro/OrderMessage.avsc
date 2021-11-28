@@ -42,10 +42,6 @@
     {
       "name": "paymentMethod",
       "type": "string"
-    },
-    {
-      "name": "amount",
-      "type": "int"
     }
   ]
 }

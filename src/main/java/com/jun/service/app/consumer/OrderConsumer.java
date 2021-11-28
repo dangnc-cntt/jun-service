@@ -19,7 +19,7 @@ public class OrderConsumer {
 
   @KafkaListener(topics = TopicConfig.SEND_ORDER)
   public void processOrder(List<OrderMessage> messages, Acknowledgment acknowledgment) {
-    log.info("==========" + messages);
+    log.info("========== Save order" + messages);
     orderService.processOrder(messages);
     acknowledgment.acknowledge();
   }

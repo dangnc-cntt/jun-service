@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Vnp_Ultil {
   public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-  public static String vnp_Returnurl = "http://localhost:3000";
+  public static String vnp_Returnurl = "http://localhost:3000/payment";
   public static String vnp_TmnCode = "APPRNCNX";
   public static String vnp_HashSecret = "QZXCQMIJFCIVQLKGQQARETBKETJSMAKM";
   public static String vnp_apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
@@ -116,17 +116,7 @@ public class Vnp_Ultil {
     }
   }
 
-  public static void main(String[] args) {
-    Random rnd = new Random();
-
-    int len = 8;
-    String chars = "0123456789";
-    StringBuilder sb = new StringBuilder(len);
-    for (int i = 0; i < len; i++) {
-      sb.append(chars.charAt(rnd.nextInt(chars.length())));
-    }
-    System.out.println(sb.toString());
-  }
+  public static void main(String[] args) {}
 
   public static String getRandomNumber(int len) {
     Random rnd = new Random();

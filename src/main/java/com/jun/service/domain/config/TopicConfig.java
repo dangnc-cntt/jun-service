@@ -12,6 +12,9 @@ import java.util.Map;
 public class TopicConfig {
   public static final String SEND_MAIL_OTP = "jun_email_otp";
   public static final String SEND_ORDER = "jun_order";
+  public static final String SEND_REVIEW = "jun_review";
+  public static final String VALID_TOPIC = "jun_View";
+  public static final String RESULT_TOPIC = "jun_result";
 
   @Value("${spring.kafka.topic.replication-factor}")
   private short replicationFactor;
@@ -35,6 +38,20 @@ public class TopicConfig {
   @Bean
   public NewTopic createOrderTopic() {
     NewTopic topic = new NewTopic(SEND_ORDER, numPartitions, replicationFactor);
+    topic.configs(defaultConfigs);
+    return topic;
+  }
+
+  @Bean
+  public NewTopic createReviewTopic() {
+    NewTopic topic = new NewTopic(SEND_REVIEW, numPartitions, replicationFactor);
+    topic.configs(defaultConfigs);
+    return topic;
+  }
+
+  @Bean
+  public NewTopic createValidTopic() {
+    NewTopic topic = new NewTopic(VALID_TOPIC, numPartitions, replicationFactor);
     topic.configs(defaultConfigs);
     return topic;
   }

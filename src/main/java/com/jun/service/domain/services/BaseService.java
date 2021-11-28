@@ -149,7 +149,7 @@ public class BaseService {
     vnp_Params.put("vnp_TmnCode", Vnp_Ultil.vnp_TmnCode);
     vnp_Params.put("vnp_Amount", String.valueOf(dto.getPrice() * 100));
     vnp_Params.put("vnp_CurrCode", "VND");
-    vnp_Params.put("vnp_BankCode", dto.getBankCode());
+    vnp_Params.put("vnp_BankCode", dto.getBankCode() == null ? "NCB" : dto.getBankCode());
     vnp_Params.put("vnp_TxnRef", dto.getOderId().toString());
     vnp_Params.put("vnp_OrderInfo", "thanh toan don " + dto.getOderId());
     vnp_Params.put("vnp_OrderType", "250000");

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderRepository extends MongoRepository<Order, Long> {
-  Page<Order> findByOrderedByOrderByCreatedAt(Integer accountId, Pageable pageable);
+  Page<Order> findByOrderedByOrderByCreatedAtDesc(Integer accountId, Pageable pageable);
 
   Order findByIdAndOrderedBy(Long id, Integer accountId);
 
