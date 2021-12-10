@@ -4,6 +4,7 @@ import com.jun.service.app.responses.CartProductResponse;
 import com.jun.service.app.responses.Metadata;
 import com.jun.service.app.responses.PageResponse;
 import com.jun.service.app.responses.ProductResponse;
+import com.jun.service.domain.data.SortType;
 import com.jun.service.domain.entities.Product;
 import com.jun.service.domain.entities.ProductOption;
 import com.jun.service.domain.entities.types.ProductState;
@@ -18,13 +19,23 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class ProductService extends BaseService {
   public PageResponse<ProductResponse> filter(
-      Integer categoryId, String code, String name, Boolean isHot, Pageable pageable) {
+      Integer categoryId,
+      String code,
+      String name,
+      Boolean isHot,
+      SortType sortType,
+      Integer star,
+      Float from,
+      Float to,
+      Pageable pageable) {
     List<Criteria> andConditions = new ArrayList<>();
 
     andConditions.add(Criteria.where("state").is(ProductState.ACTIVE));
@@ -34,16 +45,32 @@ public class ProductService extends BaseService {
     if (StringUtils.isNotEmpty(code)) {
       andConditions.add(Criteria.where("code").regex(code, "i"));
     }
-    if (StringUtils.isNotEmpty(code)) {
+    if (StringUtils.isNotEmpty(name)) {
       andConditions.add(Criteria.where("name").regex(name, "i"));
     }
     if (isHot != null) {
       andConditions.add(Criteria.where("is_hot").is(isHot));
     }
 
+    if (star != null) {
+      andConditions.add(Criteria.where("star").is(star));
+    }
+
+    if (from != null && to != null) {
+      andConditions.add(Criteria.where("price").gte(from));
+      andConditions.add(Criteria.where("price").lte(to));
+    }
+
     Query query = new Query();
     Criteria criteria = new Criteria();
     query.addCriteria(criteria.andOperator((andConditions.toArray(new Criteria[0]))));
+    if (sortType != null) {
+      if (sortType.equals(SortType.asc)) {
+        query.with(Sort.by(Sort.Direction.ASC, "price"));
+      } else {
+        query.with(Sort.by(Sort.Direction.DESC, "price"));
+      }
+    }
     query.with(Sort.by(Sort.Direction.DESC, "createdAt"));
 
     log.info(query + "");

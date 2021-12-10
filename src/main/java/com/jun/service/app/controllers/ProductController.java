@@ -2,6 +2,7 @@ package com.jun.service.app.controllers;
 
 import com.jun.service.app.responses.PageResponse;
 import com.jun.service.app.responses.ProductResponse;
+import com.jun.service.domain.data.SortType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,14 @@ public class ProductController extends BaseController {
       @RequestParam(required = false) String code,
       @RequestParam(required = false) String name,
       @RequestParam(required = false) Boolean isHot,
+      @RequestParam(required = false) SortType sortType,
+      @RequestParam(required = false) Integer star,
+      @RequestParam(required = false) Float fromPrice,
+      @RequestParam(required = false) Float toPrice,
       Pageable pageable) {
-    return ResponseEntity.ok(productService.filter(categoryId, code, name, isHot, pageable));
+    return ResponseEntity.ok(
+        productService.filter(
+            categoryId, code, name, isHot, sortType, star, fromPrice, toPrice, pageable));
   }
 
   @GetMapping("{productId}")

@@ -1,5 +1,6 @@
 package com.jun.service.domain.services;
 
+import com.jun.service.app.responses.VoucherResponse;
 import com.jun.service.domain.entities.VoucherAccount;
 import com.jun.service.domain.entities.types.VoucherState;
 import com.jun.service.domain.entities.voucher.Voucher;
@@ -52,6 +53,9 @@ public class VoucherService extends BaseService {
         ids.add(voucherAccount.getVoucherId());
       }
       List<Voucher> voucherList = voucherStorage.findByIds(new ArrayList<>(ids), pageable);
+
+
+
       return voucherList.stream().filter(predicate()).collect(Collectors.toList());
     } else {
       return null;

@@ -70,7 +70,7 @@ public class AuthenticationService extends BaseService {
         break;
 
       case FORGOT:
-        redisKey = CacheKey.genForgotPasswordKey(account.getUsername());
+        redisKey = CacheKey.genForgotPasswordKey(account.getEmail());
         break;
 
       case CHANGE_PASSWORD:
@@ -198,7 +198,7 @@ public class AuthenticationService extends BaseService {
       throw new AccountNotExistsException();
     }
     CheckOtpDTO checkOtpDTO = new CheckOtpDTO();
-    checkOtpDTO.setUsername(account.getUsername());
+    checkOtpDTO.setUsername(account.getEmail());
     checkOtpDTO.setCode(dto.getCode());
     checkOtpForgotPassword(checkOtpDTO);
     comparePassword(dto.getPassword(), dto.getConfirmedPassword());

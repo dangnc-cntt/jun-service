@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface VoucherRepository extends MongoRepository<Voucher, Integer> {
 
-  Voucher findByIdAndStateAndExpiryDateBefore(
+  Voucher findByIdAndStateAndExpiryDateAfter(
       Integer voucherId, VoucherState state, LocalDateTime timeNow);
 
   @Query(value = "{ '_id' : {'$in' : ?0 } }", fields = "{ 'description': 0 }")

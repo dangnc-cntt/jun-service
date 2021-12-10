@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -19,6 +20,6 @@ public class ConfigService extends BaseService {
     if (config == null) {
       throw new ResourceNotFoundException("No config found!");
     }
-    return JsonParser.arrayList(config.getValue(), String.class);
+    return Arrays.asList(config.getValue().split(","));
   }
 }

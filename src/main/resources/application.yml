@@ -1,12 +1,12 @@
 spring:
   data:
     mongodb:
-      uri: ${MONGODB_URI}
+      uri: mongodb://127.0.0.1:27017/jun_database
     web:
       pageable:
         size-parameter: size
         page-parameter: page
-        default-page-size: ${SIZE}
+        default-page-size: 10
         max-page-size: 100
       sort:
         sort-parameter: sort
@@ -15,17 +15,17 @@ spring:
       type: batch
       ack-mode: manual_immediate
       missing-topics-fatal: false
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    bootstrap-servers: 127.0.0.1:9092
     topic:
-      replication-factor: ${KAFKA_REPLICATION_FACTOR}
-      num-partitions: ${KAFKA_NUM_PARTITIONS}
+      replication-factor: 1
+      num-partitions: 1
     producer:
       acks: all
       retries: 100
       key-serializer: org.apache.kafka.common.serialization.LongSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       properties:
-        schema.registry.url: ${SCHEMA_REGISTRY_URL}
+        schema.registry.url: http://127.0.0.1:8081
         specific.avro.reader: true
       template:
         default-topic: test
@@ -38,52 +38,27 @@ spring:
         request:
           timeout:
             ms: 12000000
-        schema.registry.url: ${SCHEMA_REGISTRY_URL}
+        schema.registry.url: http://127.0.0.1:8081
         specific.avro.reader: true
       max-poll-records: 300
       fetch-max-wait: 3000 # 10s
       fetch-min-size: 50000000 #50mb
       group-id: "jun-service"
-    streams:
-      application-id: wiinvent-eventlog-streams
-      cache-max-size-buffering: 20MB
-      state-dir: ${STATE_DIR}
-      properties:
-        # num.standby.replicas: 1
-        num.stream.threads: 3
-        auto.offset.reset: earliest
-        schema.registry.url: ${SCHEMA_REGISTRY_URL}
-        processing.guarantee: exactly_once
-        default.timestamp.extractor: org.apache.kafka.streams.processor.WallclockTimestampExtractor
-        buffered.records.per.partition: 100
-        default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-        default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-#  aop:
+
 #    proxy-target-class: true
 #  main:
 #    allow-bean-definition-overriding: true
-debug: ${DEBUG}
+debug: true
 server:
-  port: ${PORT}
+  port: 8093
   error:
     include-stacktrace: on_trace_param
-black-list: ${BLACK_LIST}
-facebook-info-url: ${FACEBOOK_URL}
-google-info-url: ${GOOGLE_URL}
 
 jwt:
-  secret: ${JWT_SECRET}
-  token-expire-time: ${JWT_TOKEN_EXPIRE_TIME}
-  token-refresh-expire-time: ${JWT_TOKEN_REFRESH_EXPIRE_TIME}
-wiinvent:
-  account:
-    service:
-      domain: ${WIINVENT_ACCOUNT_SERVICE_DOMAIN}
-phone:
-  card:
-    login: ${PHONE_CARD_LOGIN}
-    get-code: ${PHONE_CARD_GET_CODE}
-    username: ${PHONE_CARD_USERNAME}
-    password: ${PHONE_CARD_PASSWORD}
+  secret: abajihi3hi234hihi3f09acn
+  token-expire-time: 7200
+  token-refresh-expire-time: 1296000
+    
+
 
 

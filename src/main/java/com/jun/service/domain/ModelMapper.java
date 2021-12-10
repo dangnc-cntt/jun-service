@@ -6,8 +6,10 @@ import com.jun.service.app.dtos.RegisterDTO;
 import com.jun.service.app.responses.AccountResponse;
 import com.jun.service.app.responses.CartProductResponse;
 import com.jun.service.app.responses.ProductResponse;
+import com.jun.service.app.responses.VoucherResponse;
 import com.jun.service.domain.entities.Product;
 import com.jun.service.domain.entities.account.Account;
+import com.jun.service.domain.entities.voucher.Voucher;
 import jun.message.OrderMessage;
 import org.mapstruct.Mapper;
 
@@ -25,4 +27,5 @@ public interface ModelMapper {
   CartProductResponse toCartProductResponse(Product product);
 
   OrderMessage toOrderMessage(OrderDTO dto);
+
 }

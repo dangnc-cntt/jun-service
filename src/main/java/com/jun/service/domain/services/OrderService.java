@@ -105,7 +105,7 @@ public class OrderService extends BaseService {
             if (product == null) {
               throw new ResourceNotFoundException("No product found!");
             }
-            discount = discount - (product.getDiscount() * cartProduct.getAmount());
+            discount = discount + (product.getDiscount() * cartProduct.getAmount());
           }
 
           if (dto.getVoucherId() != null && dto.getVoucherId() != -1) {
@@ -271,7 +271,10 @@ public class OrderService extends BaseService {
       orderRepository.saveAll(orders);
       cartRepository.saveAll(new ArrayList<>(carts.values()));
       productOptionStorage.saveAll(new ArrayList<>(optionList.values()));
-      voucherAccountRepository.deleteAll(voucherAccounts);
+
+      if (voucherAccounts != null && voucherAccounts.size() > 0) {
+        voucherAccountRepository.deleteAll(voucherAccounts);
+      }
     }
   }
 

@@ -72,6 +72,7 @@ public class BaseService {
   @Autowired protected CartStorage cartStorage;
   @Autowired protected ProductService productService;
   @Autowired protected ProductOptionStorage productOptionStorage;
+  @Autowired protected ReviewRepository reviewRepository;
 
   public long generateSequence(String seqName) {
     Sequence counter =

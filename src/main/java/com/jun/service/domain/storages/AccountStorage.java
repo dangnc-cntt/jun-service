@@ -16,7 +16,7 @@ public class AccountStorage extends BaseStorage {
 
     if (account == null) {
       account = new Account();
-      account = accountRepository.findAccountByUsername(userName);
+      account = accountRepository.findAccountByEmail(userName);
 
       if (account != null) {
         caching.put(CacheKey.genAccountByUserNameKey(userName), account);
@@ -26,7 +26,7 @@ public class AccountStorage extends BaseStorage {
   }
 
   public Account findAccountByUserNameNotCache(String userName) {
-    return accountRepository.findAccountByUsername(userName);
+    return accountRepository.findAccountByEmail(userName);
   }
 
   public void processCache(Account account) {

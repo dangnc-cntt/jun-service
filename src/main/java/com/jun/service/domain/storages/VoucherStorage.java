@@ -13,7 +13,7 @@ public class VoucherStorage extends BaseStorage {
 
   public Voucher findById(Integer voucherId) {
 
-    return voucherRepository.findByIdAndStateAndExpiryDateBefore(
+    return voucherRepository.findByIdAndStateAndExpiryDateAfter(
         voucherId, VoucherState.ACTIVE, LocalDateTime.now());
   }
 
